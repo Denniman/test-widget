@@ -2,19 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
-    <title>Vite + React + TS</title>
-    <script type="module" crossorigin src="/assets/index-540f71c5.js"></script>
+    <title>Widget test</title>
+    <script src="bundle.js"></script>
   </head>
-  <body>
-    <div id="root"></div>
-    
+  <body onload="setUpWidget()">
+    <div id="tensfer-widget-wrapper">
+      <p>
+        Please click the button if you're not automatically redirected to the
+        widget
+      </p>
+
+      <button id="button">Load widget</button>
+    </div>
+
+    <script type="text/javascript">
+      const mySetup = new Dennis({
+        companyName: "Coinbase",
+        token: "0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254",
+        apiKey: "cC4d55a83ae1A449Bee7783A2737aFb5d82254",
+        products: ["auth", "balance", "transactions"],
+        onSucess: function (data) {
+          console.log(data);
+        },
+        onError: function (data) {
+          console.log(data);
+        },
+        onClose: function (data) {
+          console.log(data);
+        },
+      });
+
+      const button = document.querySelector("#button");
+
+      function setUpWidget() {
+        mySetup.setup();
+        mySetup.open();
+      }
+
+      button.addEventListener("click", function () {
+        mySetup.setup();
+        mySetup.open();
+      });
+    </script>
   </body>
 </html>
